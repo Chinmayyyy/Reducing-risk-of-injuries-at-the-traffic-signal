@@ -1,7 +1,7 @@
 import RPi.GPIO as GPIO
-#above library is req for sensors and this is why it wont run as there is no arduino sensor attached
+#above library is req for IR sensor made out of led n arduino
 import time
-from skimage import data
+from skimage import data                     #collection of algorithms for image processing and computer vision.
 import matplotlib.pyplot as plt
 #the libraries below are for image segmentation and conversion of image to string
 import re
@@ -80,7 +80,6 @@ RGB_MODE = 'RGB'
 SUPPORTED_FORMATS = {
     'PNG'
 }
-#below is a step in image segmentation, in case the tesseract ocr does not work
 OSD_KEYS = {
     'Page number': ('page_num', int),
     'Orientation in degrees': ('orientation', int),
@@ -89,13 +88,12 @@ OSD_KEYS = {
     'Script': ('script', str),
     'Script confidence': ('script_conf', float),
 }
-#below we define classes
 class Output:
     BYTES = 'bytes'
     DATAFRAME = 'data.frame'
     DICT = 'dict'
     STRING = 'string'
-#below we write a backup code in case runtime error occurs
+#backup code in case runtime error occurs
 def timeout_manager(proc, seconds=None):
     try:
         if not seconds:
@@ -143,7 +141,7 @@ def save(image):
             yield f.name, input_file_name
     finally:
         cleanup(f.name)
-#the code below convert image to string and establishes what should be done if challan cant be issued
+#convert image to string and establish what should be done if challan cant be issued
 def run_challan(
     input_filename,
     output_filename_base,
